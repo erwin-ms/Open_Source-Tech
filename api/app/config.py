@@ -1,0 +1,12 @@
+"""Application configuration loaded from environment variables."""
+
+import os
+
+
+DATABASE_URL: str = os.getenv(
+    "DATABASE_URL",
+    "postgresql+asyncpg://appuser:changeme@localhost:5432/opensourcetech",
+)
+
+API_HOST: str = os.getenv("API_HOST", "0.0.0.0")
+API_PORT: int = int(os.getenv("API_PORT", "8000"))
