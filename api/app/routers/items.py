@@ -1,6 +1,6 @@
 """CRUD API endpoints for Items."""
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -14,7 +14,7 @@ router = APIRouter(prefix="/api/items", tags=["items"])
 @router.get("/", response_model=list[ItemOut])
 async def list_items(
     skip: int = 0,
-    limit: int = 100,
+    limit: int = Query(default=100, le=1000),
     db: AsyncSession = Depends(get_db),
 ):
     """Return a paginated list of items."""
